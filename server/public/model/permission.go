@@ -873,7 +873,6 @@ func initializePermissions() {
 		PermissionScopeSystem,
 	}
 
-	// DEPRECATED
 	PermissionPurgeBleveIndexes = &Permission{
 		"purge_bleve_indexes",
 		"",
@@ -881,7 +880,6 @@ func initializePermissions() {
 		PermissionScopeSystem,
 	}
 
-	// DEPRECATED
 	PermissionCreatePostBleveIndexesJob = &Permission{
 		"create_post_bleve_indexes_job",
 		"",
@@ -889,7 +887,6 @@ func initializePermissions() {
 		PermissionScopeSystem,
 	}
 
-	// DEPRECATED
 	PermissionManagePostBleveIndexesJob = &Permission{
 		"manage_post_bleve_indexes_job",
 		"",
@@ -2130,15 +2127,12 @@ func initializePermissions() {
 		"",
 		PermissionScopeSystem,
 	}
-
-	// DEPRECATED
 	PermissionSysconsoleReadExperimentalBleve = &Permission{
 		"sysconsole_read_experimental_bleve",
 		"",
 		"",
 		PermissionScopeSystem,
 	}
-	// DEPRECATED
 	PermissionSysconsoleWriteExperimentalBleve = &Permission{
 		"sysconsole_write_experimental_bleve",
 		"",
@@ -2369,6 +2363,7 @@ func initializePermissions() {
 		PermissionSysconsoleReadComplianceCustomTermsOfService,
 		PermissionSysconsoleReadExperimentalFeatures,
 		PermissionSysconsoleReadExperimentalFeatureFlags,
+		PermissionSysconsoleReadExperimentalBleve,
 		PermissionSysconsoleReadProductsBoards,
 		PermissionSysconsoleReadIPFilters,
 	}
@@ -2428,6 +2423,7 @@ func initializePermissions() {
 		PermissionSysconsoleWriteComplianceCustomTermsOfService,
 		PermissionSysconsoleWriteExperimentalFeatures,
 		PermissionSysconsoleWriteExperimentalFeatureFlags,
+		PermissionSysconsoleWriteExperimentalBleve,
 		PermissionSysconsoleWriteProductsBoards,
 		PermissionSysconsoleWriteIPFilters,
 	}
@@ -2486,6 +2482,9 @@ func initializePermissions() {
 		PermissionManageElasticsearchPostAggregationJob,
 		PermissionReadElasticsearchPostIndexingJob,
 		PermissionReadElasticsearchPostAggregationJob,
+		PermissionPurgeBleveIndexes,
+		PermissionCreatePostBleveIndexesJob,
+		PermissionManagePostBleveIndexesJob,
 		PermissionCreateLdapSyncJob,
 		PermissionManageLdapSyncJob,
 		PermissionReadLdapSyncJob,
@@ -2615,11 +2614,6 @@ func initializePermissions() {
 		PermissionSysconsoleWriteIntegrations,
 		PermissionSysconsoleReadCompliance,
 		PermissionSysconsoleWriteCompliance,
-		PermissionPurgeBleveIndexes,
-		PermissionCreatePostBleveIndexesJob,
-		PermissionManagePostBleveIndexesJob,
-		PermissionSysconsoleReadExperimentalBleve,
-		PermissionSysconsoleWriteExperimentalBleve,
 	}
 
 	PlaybookScopedPermissions := []*Permission{

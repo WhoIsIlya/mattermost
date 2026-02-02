@@ -649,6 +649,13 @@ const defaultServerConfig: AdminConfig = {
         Trace: '',
         IgnoredPurgeIndexes: '',
     },
+    BleveSettings: {
+        IndexDir: '',
+        EnableIndexing: false,
+        EnableSearching: false,
+        EnableAutocomplete: false,
+        BatchSize: 10000,
+    },
     DataRetentionSettings: {
         EnableMessageDeletion: false,
         EnableFileDeletion: false,
