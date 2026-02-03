@@ -55,6 +55,40 @@ func init() {
 	dateMapping = bleve.NewNumericFieldMapping()
 }
 
+func (be *BleveEngine) SyncBulkIndexChannels(
+    rctx request.CTX,
+    channels []*model.Channel,
+    getUserIDsForChannel func(channel *model.Channel) ([]string, error),
+    teamMemberIDs []string,
+) *model.AppError {
+    for _, ch := range channels {
+        if ch == nil {
+            continue
+        }
+
+        userIDs := []string{}
+        if getUserIDsForChannel != nil {
+            ids, err := getUserIDsForChannel(ch)
+            if err != nil {
+                return model.NewAppError(
+                    "BleveEngine.SyncBulkIndexChannels",
+                    "app.search.bulk_index_channels.user_ids.error",
+                    nil,
+                    err.Error(),
+                    500,
+                )
+            }
+            userIDs = ids
+        }
+
+        if appErr := be.IndexChannel(rctx, ch, userIDs, teamMemberIDs); appErr != nil {
+            return appErr
+        }
+    }
+
+    return nil
+}
+
 func getChannelIndexMapping() *mapping.IndexMappingImpl {
 	channelMapping := bleve.NewDocumentMapping()
 	channelMapping.AddFieldMappingsAt("Id", keywordMapping)
