@@ -14,6 +14,7 @@ const (
 	EngineAll           = "all"
 	EnginePostgres      = "postgres"
 	EngineElasticSearch = "elasticsearch"
+	EngineBleve         = "bleve"
 )
 
 type SearchTestEngine struct {

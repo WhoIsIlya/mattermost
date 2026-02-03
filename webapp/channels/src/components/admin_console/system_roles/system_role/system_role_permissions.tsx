@@ -146,6 +146,7 @@ const sectionsList: SystemSection[] = [
         subsections: [
             {name: 'experimental_features'},
             {name: 'experimental_feature_flags'},
+            {name: 'experimental_bleve'},
         ],
     },
 ];

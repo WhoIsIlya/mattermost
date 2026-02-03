@@ -412,5 +412,14 @@
                 "selector": ""
             }
         ]
+    },
+    {
+        "section": "experimental.bleve",
+        "disabledInputs": [
+            {
+                "path": "/admin_console/experimental/blevesearch",
+                "selector": "indexDirinput"
+            }
+        ]
     }
 ]

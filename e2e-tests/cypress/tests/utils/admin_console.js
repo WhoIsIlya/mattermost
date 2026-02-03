@@ -359,4 +359,10 @@ export const adminConsoleNavigation = [
         sidebar: 'Feature Flags',
         url: 'admin_console/experimental/feature_flags',
     },
+    {
+        type: ['team', 'e20'],
+        header: 'Bleve',
+        sidebar: 'Bleve',
+        url: 'admin_console/experimental/blevesearch',
+    },
 ];

@@ -23,7 +23,7 @@ var searchPostStoreTests = []searchTest{
 	{
 		Name: "Should be able to search posts using pagination",
 		Fn:   testSearchPostsWithPagination,
-		Tags: []string{EngineElasticSearch},
+		Tags: []string{EngineElasticSearch, EngineBleve},
 	},
 	{
 		Name: "Should return pinned and unpinned posts",

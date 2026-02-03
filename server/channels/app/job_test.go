@@ -40,6 +40,11 @@ func TestSessionHasPermissionToCreateJob(t *testing.T) {
 	jobs := []model.Job{
 		{
 			Id:       model.NewId(),
+			Type:     model.JobTypeBlevePostIndexing,
+			CreateAt: 1000,
+		},
+		{
+			Id:       model.NewId(),
 			Type:     model.JobTypeDataRetention,
 			CreateAt: 999,
 		},
@@ -56,10 +61,14 @@ func TestSessionHasPermissionToCreateJob(t *testing.T) {
 	}{
 		{
 			Job:                jobs[0],
-			PermissionRequired: model.PermissionCreateDataRetentionJob,
+			PermissionRequired: model.PermissionCreatePostBleveIndexesJob,
 		},
 		{
 			Job:                jobs[1],
+			PermissionRequired: model.PermissionCreateDataRetentionJob,
+		},
+		{
+			Job:                jobs[2],
 			PermissionRequired: model.PermissionCreateComplianceExportJob,
 		},
 	}
@@ -90,10 +99,24 @@ func TestSessionHasPermissionToCreateJob(t *testing.T) {
 
 	role, _ := th.App.GetRoleByName(RequestContextWithMaster(th.Context), model.SystemReadOnlyAdminRoleId)
 
+	role.Permissions = append(role.Permissions, model.PermissionCreatePostBleveIndexesJob.Id)
+
+	_, err := th.App.UpdateRole(role)
+	require.Nil(t, err)
+
+	// Now system read only admin should have ability to create a Belve Post Index job but not the others
+	for _, testCase := range testCases {
+		hasPermission, permissionRequired := th.App.SessionHasPermissionToCreateJob(session, &testCase.Job)
+		expectedHasPermission := testCase.Job.Type == model.JobTypeBlevePostIndexing
+		assert.Equal(t, expectedHasPermission, hasPermission)
+		require.NotNil(t, permissionRequired)
+		assert.Equal(t, testCase.PermissionRequired.Id, permissionRequired.Id)
+	}
+
 	role.Permissions = append(role.Permissions, model.PermissionCreateDataRetentionJob.Id)
 	role.Permissions = append(role.Permissions, model.PermissionCreateComplianceExportJob.Id)
 
-	_, err := th.App.UpdateRole(role)
+	_, err = th.App.UpdateRole(role)
 	require.Nil(t, err)
 
 	// Now system read only admin should have ability to create all jobs
